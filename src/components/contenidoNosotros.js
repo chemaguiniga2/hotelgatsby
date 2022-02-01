@@ -4,29 +4,27 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-const TextoInicio = styled.div`
+const Contenido = styled.main`
     padding-top: 4rem;
-    max-width: 1200ox;
+    max-width: 1200px;
     width: 95%;
     margin: 0 auto;
 
-    @media(min-width: 768px){
+    @media (min-width: 768px){
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        column-gap: 2rem;
+        column-gap: 3rem;
     }
-
     p {
         line-height: 2;
         margin-top: 2rem;
     }
 `;
 
-const ContenidoInicio = () => {
-
-    const informacion = useStaticQuery(graphql`
+const ContenidoNosotros = () => {
+    const resultado = useStaticQuery(graphql`
         query {
-            allDatoCmsPagina(filter: { slug: { eq: "inicio" } }) {
+            allDatoCmsPagina(filter: { slug: { eq: "Nosotros" } }) {
                 nodes {
                     titulo
                     contenido
@@ -38,25 +36,22 @@ const ContenidoInicio = () => {
         }
     `);
 
-    const { titulo, contenido, imagen } = informacion.allDatoCmsPagina.nodes[0];
-
+    const { titulo, contenido, imagen } = resultado.allDatoCmsPagina.nodes[0];
     return (
         <>
             <h2
                 css={css`
+                    margin-top: 4rem;
                     text-align: center;
                     font-size: 4rem;
-                    margin-top: 4rem;
                 `}
             >{titulo}</h2>
-
-            <TextoInicio>
+            <Contenido>
                 <p>{contenido}</p>
                 <GatsbyImage image={imagen.gatsbyImageData} />
-            </TextoInicio>
+            </Contenido>
         </>
-
     );
 }
  
-export default ContenidoInicio;
+export default ContenidoNosotros;
